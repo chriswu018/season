@@ -751,3 +751,89 @@ a:focus {
 
 
 
+
+/* Academic Table Styling (Booktabs style) */
+.table-container {
+  overflow-x: auto;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--background-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.table th {
+  border-top: 2px solid var(--text-primary);
+  border-bottom: 1px solid var(--text-primary);
+  font-weight: 700;
+  padding: 0.75rem;
+  text-align: center;
+  color: var(--text-primary);
+  background-color: var(--background-secondary);
+}
+
+.table td {
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.table tr:last-child td {
+  border-bottom: 2px solid var(--text-primary);
+}
+
+.table tr:hover td {
+  background-color: var(--background-accent);
+  color: var(--text-primary);
+}
+
+/* Blockquote Styling */
+blockquote {
+  background: var(--background-accent);
+  border-left: 5px solid var(--primary-color);
+  margin: 1.5em 0;
+  padding: 1em 1.5em;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  font-style: italic;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Math/Variable Styling */
+.math-tex {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+}
+
+/* List Styling */
+.content ul {
+  list-style-type: disc;
+  margin-left: 2em;
+  margin-top: 1em;
+}
+
+.content li {
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+}
+
+/* Box Styling for Examples */
+.box {
+  background-color: var(--background-secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  margin-top: 1.5rem;
+}
+
+.box .title {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
