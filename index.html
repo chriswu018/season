@@ -6,8 +6,9 @@
   <meta name="description"
     content="Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment">
   <meta name="keywords" content="Hallucination, Multimodal LLMs, Video Understanding, Contrastive Learning, SANTA">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SANTA: Mitigating Object and Action Hallucinations in Multimodal LLMs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SANTA</title>
+  <link rel="icon" href="ntu.png">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -63,11 +64,8 @@
             More Research
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://arxiv.org/abs/2402.11411">
-              VCD (CVPR 2024)
-            </a>
-            <a class="navbar-item" href="https://arxiv.org/abs/2405.14815">
-              Vista-LLaMA
+            <a class="navbar-item" href="https://openreview.net/pdf?id=bshfchPM9H">
+              Rapper (ICLR 2024)
             </a>
           </div>
         </div>
@@ -79,18 +77,43 @@
 
   <section class="hero">
     <div class="hero-body">
-      <div class="container is-max-desktop">
+      <div class="container is-max-widescreen">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Mitigating Object and Action Hallucinations in Multimodal
-              LLMs<br>via Self-Augmented Contrastive Alignment</h1>
+            <h1 class="title publication-title" style="font-size: 2.35rem;">Mitigating Object and Action Hallucinations
+              in Multimodal LLMs<br>via Self-Augmented Contrastive Alignment</h1>
+            <div class="is-size-3 publication-authors" style="color: #2563eb; font-weight: bold; margin-bottom: 1rem;">
+              WACV 2026
+            </div>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="#">Anonymous Authors</a><sup>1</sup></span>
+                <a href="https://kaipoc0810-personal-page.netlify.app/">Kai-Po Chang</a><sup>1,†</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/weiyuan0819/">Wei-Yuan Cheng</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://jasper0314-huang.github.io/">Chi-Pin Huang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://fuenyang1127.github.io/">Fu-En Yang</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://vllab.ee.ntu.edu.tw/ycwang.html">Yu-Chiang Frank Wang</a><sup>1,2,‡</sup></span>
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup>1</sup>WACV 2026 Submission #290</span>
+              <span class="author-block"><sup>1</sup>National Taiwan University</span>
+              <span class="author-block"><sup>2</sup>NVIDIA</span>
+            </div>
+
+            <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
+              <span class="author-block"><sup>†</sup>f11942093@ntu.edu.tw, <sup>‡</sup>frankwang@nvidia.com</span>
+            </div>
+
+            <div class="columns is-mobile is-centered" style="margin-top: 1.5rem;">
+              <div class="column is-narrow">
+                <img src="./figs/ntu_logo.png" alt="NTU Logo" style="height: 60px; margin: 0 20px;">
+              </div>
+              <div class="column is-narrow">
+                <img src="./figs/nvidia_logo.png" alt="NVIDIA Logo" style="height: 60px; margin: 0 20px;">
+              </div>
             </div>
 
             <div class="column has-text-centered">
@@ -126,13 +149,48 @@
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <div class="publication-banner">
-          <img src="./figs/teaser.png" alt="Teaser Image" style="width: 100%; height: auto;">
+        <div class="publication-banner" style="max-width: 60%; margin: 0 auto 2rem auto;">
+          <img src="./figs/teaser.png" alt="Teaser Image" style="width: 100%; height: auto; max-width: none;">
         </div>
-        <h2 class="subtitle has-text-centered">
-          Compared to existing MLLMs suffering from object and action hallucinations, our SANTA enhances faithfulness in
-          describing both visual objects and temporal actions.
-        </h2>
+        <div class="columns is-centered has-text-centered" style="margin-top: 2rem;">
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #f0f9ff; border: 1px solid #bae6fd;">
+              <span class="icon is-large has-text-info" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-bullseye fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-info has-text-weight-bold" style="margin-bottom: 0.5rem;">Goal</h4>
+              <p class="is-size-6 has-text-left">
+                Enable MLLMs to generate faithful textual captions that accurately describe visual objects and temporal
+                actions without hallucinations.
+              </p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #fef2f2; border: 1px solid #fecaca;">
+              <span class="icon is-large has-text-danger" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-exclamation-triangle fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-danger has-text-weight-bold" style="margin-bottom: 0.5rem;">Challenge</h4>
+              <p class="is-size-6 has-text-left">
+                MLLMs often hallucinate non-existent objects or incorrect actions due to language priors and inability
+                to ground temporal dynamics.
+              </p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #f0fdf4; border: 1px solid #bbf7d0;">
+              <span class="icon is-large has-text-success" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-lightbulb fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-success has-text-weight-bold" style="margin-bottom: 0.5rem;">Our Solution
+              </h4>
+              <p class="is-size-6 has-text-left">
+                SANTA enhances faithfulness via self-augmented hallucinations as hard negatives and fine-grained
+                tracklet-phrase contrastive alignment.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -149,10 +207,8 @@
               descriptive captions for input videos. However, these models suffer from factual inaccuracies in the
               generated descriptions, causing severe hallucination issues. While prior works have explored alleviating
               hallucinations for static images, jointly mitigating visual object and temporal action hallucinations for
-              dynamic videos remains a challenging and unsolved task.
-            </p>
-            <p>
-              To tackle this challenge, we propose a <strong>Self-Augmented Contrastive Alignment (SANTA)</strong>
+              dynamic videos remains a challenging and unsolved task. To tackle this challenge, we propose a
+              <strong>Self-Augmented Contrastive Alignment (SANTA)</strong>
               framework for enabling object and action faithfulness by exempting the spurious correlations and enforcing
               the emphasis on visual facts. SANTA employs a hallucinative self-augmentation scheme to identify the
               potential hallucinations that lie in the MLLM and transform the original captions to the contrasted
@@ -168,104 +224,6 @@
     </div>
   </section>
 
-  <section class="section">
-    <div class="container is-max-desktop">
-      <!-- Task. -->
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Task Definition</h2>
-          <div class="content has-text-justified">
-            <p>
-              <strong>Input:</strong> A dynamic video sequence $v$.<br>
-              <strong>Output:</strong> A faithful textual caption $c$ that accurately describes the visual objects and
-              temporal actions in the video, without hallucinating non-existent elements.
-            </p>
-            <div class="box has-background-light">
-              <h4 class="title is-5">Example Scenario</h4>
-              <p>
-                Consider a video showing a person cleaning a floor.
-              <ul>
-                <li><strong>Faithful Description:</strong> "A person is <em>mopping</em> the floor with a <em>mop</em>."
-                </li>
-                <li><strong>Hallucinated Description (Object):</strong> "A person is mopping the floor with a <span
-                    style="color: red;">broom</span>." (Object Hallucination)</li>
-                <li><strong>Hallucinated Description (Action):</strong> "A person is <span
-                    style="color: red;">sweeping</span> the floor." (Action Hallucination)</li>
-              </ul>
-              The goal is to ensure the model generates the faithful description by correctly identifying both the
-              object ("mop") and the action ("mopping") from the video dynamics.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Task. -->
-
-      <!-- Challenges. -->
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Challenges & Motivation</h2>
-          <div class="content has-text-justified">
-            <p>
-              Mitigating hallucinations in video MLLMs presents unique challenges compared to static images:
-            </p>
-            <ul>
-              <li><strong>Dynamic Complexity:</strong> Videos contain temporal dynamics that are harder to capture than
-                static visual features. Models often fail to distinguish similar actions (e.g., "picking up" vs.
-                "putting down") or track objects across frames.</li>
-              <li><strong>Language Priors:</strong> MLLMs often rely on strong language priors (spurious correlations)
-                rather than visual evidence. For instance, if "person" and "kitchen" often appear with "cooking" in
-                training text, the model might hallucinate "cooking" even if the person is just standing there.</li>
-              <li><strong>Limitations of Existing Works:</strong>
-                <ul>
-                  <li><em>Computationally Expensive:</em> Methods like VCD or DeCo require extra decoding steps, slowing
-                    down inference.</li>
-                  <li><em>Image-Focused:</em> Methods like HACL or HALVA focus on static object hallucinations and fail
-                    to address temporal action hallucinations crucial for video understanding.</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!--/ Challenges. -->
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container is-max-desktop">
-      <!-- Key Idea. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Key Idea: SANTA Framework</h2>
-          <div class="content has-text-justified">
-            <p>
-              The core idea of <strong>SANTA (Self-Augmented Contrastive Alignment)</strong> is to leverage the model's
-              own tendency to hallucinate to improve its faithfulness.
-            </p>
-            <blockquote class="is-size-5">
-              "By identifying what the model is likely to hallucinate and using those hallucinations as negative
-              examples during training, we can teach the model to distinguish between factual visual evidence and
-              spurious language correlations."
-            </blockquote>
-            <p>
-              SANTA achieves this through two intuitive steps:
-            <ol>
-              <li><strong>Self-Generated Hallucinations:</strong> We ask the model to generate captions that it thinks
-                are likely but are actually incorrect (hallucinations). These serve as "hard negatives" — examples of
-                what <em>not</em> to generate.</li>
-              <li><strong>Fine-Grained Alignment:</strong> We align specific visual regions (objects) and temporal
-                dynamics (actions) with their corresponding words in the text. This ensures the model isn't just looking
-                at the whole video vaguely, but is paying attention to the specific "mop" when it says "mop", and the
-                specific "mopping" motion when it says "mopping".</li>
-            </ol>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!--/ Key Idea. -->
-    </div>
-  </section>
 
   <section class="section">
     <div class="container is-max-desktop">
@@ -274,125 +232,56 @@
 
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h3 class="title is-4">1. Overview</h3>
-          <div class="content has-text-justified">
-            <p>
-              The SANTA framework operates during the training phase of the MLLM. It introduces auxiliary contrastive
-              loss functions that run alongside the standard next-token prediction loss. The goal is to pull the
-              representations of visual facts (objects/actions) closer to their correct textual descriptions and push
-              them away from hallucinated descriptions.
-            </p>
-            <img src="./figs/overview.png" alt="SANTA Framework Overview"
-              style="width:100%; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          </div>
-        </div>
-      </div>
-
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h3 class="title is-4">2. Training: Self-Augmented Contrastive Alignment</h3>
-          <div class="content has-text-justified">
-            <p>
-              The training process consists of three alignment objectives:
-            </p>
-
-            <h5 class="title is-6">A. Hallucinative Self-Augmentation (Generating Negatives)</h5>
-            <p>
-              Instead of using generic negative samples, we generate <em>hallucinative captions</em>. We ask the
-              frozen MLLM to predict the next token but force it to choose the highest-probability token that is
-              <strong>NOT</strong> in the ground truth. This creates a caption that looks plausible to the language
-              model but is factually wrong. These become our hard negatives.
-            </p>
-
-            <h5 class="title is-6">B. Object-Level Alignment</h5>
-            <p>
-              We extract visual object tracklets using Grounding-SAM2. We align these visual features with the
-              corresponding object phrases in the text.
-              The negatives include other objects in the batch AND the objects from our generated hallucinated captions.
-            </p>
-
-            <h5 class="title is-6">C. Action-Level Alignment</h5>
-            <p>
-              Actions are more abstract. We use a <strong>Perceiver-based Action Squeezer</strong> that takes object
-              tracklets and learns to extract "action features" by looking at how objects interact over time.
-              This ensures the model pays attention to the <em>dynamics</em> between objects, not just their static
-              appearance.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h3 class="title is-4">3. Inference</h3>
-          <div class="content has-text-justified">
-            <p>
-              During inference, we simply use the trained MLLM to generate captions. Because the model was trained with
-              SANTA, its internal representations are now more robust against language priors and more grounded in
-              visual evidence. No extra decoding steps or external models are needed at inference time, keeping it fast.
-            </p>
-          </div>
+          <img src="./figs/overview.png" alt="SANTA Framework Overview"
+            style="width:100%; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <p>
+            <strong>Overview of SANTA.</strong> We employ (a) Mitigating Video-Level Hallucination
+            by applying Hallucinative Self-Augmentation to identify the highly potential hallucinated tokens in MLLM
+            \(\theta_M\) that deviate from ground truth words (e.g., synonyms or hypernyms) and then perform
+            video-caption contrastive alignment. SANTA then (b) Mitigating Object and Action-Level
+            Hallucinations by Tracklet-Phrase Contrastive Alignment to align object and action tracklets with visual
+            and temporal phrases while contrasting hallucinative negatives.
+          </p>
         </div>
       </div>
       <!--/ Method. -->
     </div>
   </section>
 
-  <section class="section">
-    <div class="container is-max-desktop">
-      <!-- Data & Benchmarks. -->
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Data and Evaluation</h2>
-          <div class="content has-text-justified">
-            <p>
-              <strong>Training Data:</strong> We use <strong>MiraData</strong>, a large-scale video dataset with
-              high-quality, structured captions (42k videos, avg 72s duration).
-            </p>
-            <p>
-              <strong>Evaluation Benchmarks:</strong>
-            <ul>
-              <li><strong>MiraData-9k:</strong> For evaluating captioning quality and hallucination.</li>
-              <li><strong>FactVC:</strong> A benchmark specifically designed for factual video captioning.</li>
-              <li><strong>VidHal:</strong> A multiple-choice QA benchmark for hallucination.</li>
-            </ul>
-            </p>
-            <p>
-              <strong>Metrics:</strong> We use standard metrics like FactVC-F1 and a proposed
-              <strong>Weighted-HalFscore</strong> (an improvement over HalFscore that handles synonyms and token
-              importance better).
-            </p>
-          </div>
-        </div>
-      </div>
-      <!--/ Data & Benchmarks. -->
-    </div>
-  </section>
+
 
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Results. -->
-      <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+      <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
 
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h4 class="title is-4">1. Video Captioning Performance (MiraData-9k)</h4>
+          <h4 class="title is-5">Video Hallucination Examination Benchmarks</h4>
           <div class="content has-text-centered">
-            <p>SANTA significantly outperforms baselines in reducing both object and action hallucinations.</p>
+            <p>Evaluation on both object and action hallucinations with existing methods on MiraData-9k across three
+              types of video captions: overall content, main object, and background. Bold and underline indicate the
+              best and second best results, respectively.</p>
             <img src="./tabs/miradata.png" alt="MiraData Results"
               style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
           </div>
 
-          <h4 class="title is-4">2. Factual Consistency (FactVC)</h4>
-          <div class="content has-text-centered">
-            <img src="./tabs/factvc.png" alt="FactVC Results"
-              style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-          </div>
-
-          <h4 class="title is-4">3. Hallucination QA (VidHal)</h4>
-          <div class="content has-text-centered">
-            <img src="./tabs/vidhal.png" alt="VidHal Results"
-              style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          <div class="columns is-centered" style="margin-top: 1rem;">
+            <div class="column is-half">
+              <div class="content has-text-centered">
+                <p>Quantitative comparisons with hallucination mitigation methods on video captioning using FactVC.</p>
+                <img src="./tabs/factvc.png" alt="FactVC Results"
+                  style="width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="content has-text-centered">
+                <p>Quantitative evaluation of both object and action hallucinations on video question answering using
+                  VidHal.</p>
+                <img src="./tabs/vidhal.png" alt="VidHal Results"
+                  style="width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -407,75 +296,44 @@
 
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h3 class="title is-4">Qualitative Comparison</h3>
-          <div class="content has-text-justified">
-            <p>
-              Visualizing the difference between baseline and SANTA. In the example below, the baseline hallucinates a
-              "broom" and "sweeping", while SANTA correctly identifies the "mop" and "mopping".
-            </p>
-            <!-- Placeholder for qualitative image -->
-            <div class="has-text-centered">
-              <!-- Using PNG for high quality qualitative results -->
-              <img src="./figs/main_qualitative.png" alt="Qualitative Results"
-                style="width: 100%; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-              <p class="is-size-7">Figure 4 from paper: Qualitative comparison on FactVC.</p>
-            </div>
+          <h3 class="title is-5">Qualitative Comparison</h3>
+          <!-- Placeholder for qualitative image -->
+          <div class="has-text-centered">
+            <!-- Using PNG for high quality qualitative results -->
+            <img src="./figs/main_qualitative.png" alt="Qualitative Results"
+              style="width: 100%; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
           </div>
+          <p>
+            Qualitative comparison of video captions predicted by HACL and SANTA. Note that words highlighted in
+            <span style="color: green;">green</span> indicate action faithfulness, while those in
+            <span style="color: red;">red</span> indicate action hallucination. Similarly, words in <span
+              style="color: blue;">blue</span> represent object faithfulness, whereas those in <span
+              style="color: orange;">orange</span> indicate object hallucination. The examples at (a) and (b) are
+            sampled from the hallucination benchmark.
+          </p>
         </div>
       </div>
 
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h3 class="title is-4">Feature Space Analysis (t-SNE)</h3>
-          <div class="content has-text-justified">
-            <p>
-              We visualized the feature space of the MLLM before and after SANTA training.
-            </p>
-            <div class="has-text-centered">
-              <img src="./figs/tsne.png" alt="t-SNE Analysis"
-                style="width: 100%; max-width: 800px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            </div>
-            <p>
-              <strong>Before SANTA:</strong> There is a significant overlap between the representations of ground-truth
-              captions and hallucinated captions. The model struggles to distinguish fact from fiction.<br>
-              <strong>After SANTA:</strong> The features are clearly separated. The model has learned a distinct
-              boundary between faithful descriptions and hallucinations.
-            </p>
+          <h3 class="title is-5">Analysis of Feature Space (t-SNE)</h3>
+          <div class="has-text-centered">
+            <img src="./figs/tsne.png" alt="t-SNE Analysis"
+              style="width: 100%; max-width: 800px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
           </div>
+          <p>
+            t-SNE visualization of the latent features of (a) video and caption, (b) object tracklets and phrases, and
+            (c) action tracklets and phrases. For the w/o SANTA setting, we directly visualize features from
+            LLaVA-Video. Upon training with SANTA LLaVA-Video improves the alignment between visual-language modalities
+            while exemplifying better distinction from the hallucinative captions.
+          </p>
         </div>
       </div>
       <!--/ Analysis. -->
     </div>
   </section>
 
-  <section class="section">
-    <div class="container is-max-desktop">
-      <!-- Conclusion. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Conclusion</h2>
-          <div class="content has-text-justified">
-            <p>
-              We presented <strong>SANTA</strong>, a novel framework to mitigate object and action hallucinations in
-              Multimodal LLMs. By leveraging <strong>Self-Augmented Contrastive Alignment</strong>, we enable models to:
-            </p>
-            <ul>
-              <li>Identify and suppress their own tendency to hallucinate via self-generated hard negatives.</li>
-              <li>Ground language tokens in fine-grained visual evidence through tracklet-phrase alignment.</li>
-              <li>Achieve state-of-the-art performance in factual video captioning and hallucination benchmarks.</li>
-            </ul>
-            <p>
-              SANTA offers a robust solution for deploying MLLMs in high-stakes real-world applications where
-              faithfulness is paramount.
-            </p>
-          </div>
-        </div>
-      </div>
-      <!--/ Conclusion. -->
-    </div>
-  </section>
-
-  <section class="section" id="BibTeX">
+  <!-- <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>@article{SANTA2026,
@@ -485,7 +343,7 @@
   year={2026}
 }</code></pre>
     </div>
-  </section>
+  </section> -->
 
 
   <footer class="footer">
