@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="SEASON: Mitigating Temporal Hallucination in Video Large Language Models via Self-Diagnostic Contrastive Decoding">
+  <meta name="keywords" content="Hallucination, Multimodal LLMs, Video Understanding, Contrastive Decoding, SEASON">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEASON</title>
+  <link rel="icon" href="ntu.png">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <!-- MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu｀">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://github.com/chriwu018">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+
+        <!-- <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://openreview.net/pdf?id=bshfchPM9H">
+              Rapper (ICLR 2024)
+            </a>
+          </div>
+        </div> -->
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-widescreen">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title publication-title" style="font-size: 2.35rem;">
+              SEASON: Mitigating Temporal Hallucination in Video Large Language Models 
+              <br>via Self-Diagnostic Contrastive Decoding
+            </h1>
+            <!-- <div class="is-size-3 publication-authors" style="color: #2563eb; font-weight: bold; margin-bottom: 1rem;">
+              WACV 2026
+            </div> -->
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://vllab.ee.ntu.edu.tw/">Chang-Hsun Wu</a><sup>1,†</sup>,</span>
+              <span class="author-block">
+                <a href="https://kaipoc0810-personal-page.netlify.app/">Kai-Po Chang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://vllab.ee.ntu.edu.tw/">Yu-Yang Sheng</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://vllab.ee.ntu.edu.tw/">Hung-Kai Chung</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://vllab.ee.ntu.edu.tw/">Kuei-Chun Wang</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://vllab.ee.ntu.edu.tw/ycwang.html">Yu-Chiang Frank Wang</a><sup>1,2,‡</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Graduate Institute of Communication Engineering, National Taiwan University</span>
+              <span class="author-block"><sup>2</sup>NVIDIA</span>
+            </div>
+
+            <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
+              <span class="author-block"><sup>†</sup>r14942083@ntu.edu.tw, <sup>‡</sup>frankwang@nvidia.com</span>
+            </div>
+
+            <div class="columns is-mobile is-centered" style="margin-top: 1.5rem;">
+              <div class="column is-narrow">
+                <img src="./figs/ntu_logo.png" alt="NTU Logo" style="height: 60px; margin: 0 20px;">
+              </div>
+              <div class="column is-narrow">
+                <img src="./figs/nvidia_logo.png" alt="NVIDIA Logo" style="height: 60px; margin: 0 20px;">
+              </div>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://drive.google.com/file/d/1l-xKPtunQ4q8r0TdOD1guq7QVuQfvGf-/view?usp=sharing"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser Image Section -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="publication-banner" style="max-width: 60%; margin: 0 auto 2rem auto;">
+          <img src="./figs/teaser.pdf" alt="Teaser Image" style="width: 100%; height: auto; max-width: none;">
+        </div>
+        <!-- <div class="columns is-centered has-text-centered" style="margin-top: 2rem;">
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #f0f9ff; border: 1px solid #bae6fd;">
+              <span class="icon is-large has-text-info" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-bullseye fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-info has-text-weight-bold" style="margin-bottom: 0.5rem;">Goal</h4>
+              <p class="is-size-6 has-text-left">
+                Enable MLLMs to generate faithful textual captions that accurately describe visual objects and temporal
+                actions without hallucinations.
+              </p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #fef2f2; border: 1px solid #fecaca;">
+              <span class="icon is-large has-text-danger" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-exclamation-triangle fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-danger has-text-weight-bold" style="margin-bottom: 0.5rem;">Challenge</h4>
+              <p class="is-size-6 has-text-left">
+                MLLMs often hallucinate non-existent objects or incorrect actions due to language priors and inability
+                to ground temporal dynamics.
+              </p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #f0fdf4; border: 1px solid #bbf7d0;">
+              <span class="icon is-large has-text-success" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-lightbulb fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-success has-text-weight-bold" style="margin-bottom: 0.5rem;">Our Solution
+              </h4>
+              <p class="is-size-6 has-text-left">
+                SANTA enhances faithfulness via self-augmented hallucinations as hard negatives and fine-grained
+                tracklet-phrase contrastive alignment.
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Video Large Language Models (VideoLLMs) have shown remarkable progress in video understanding.
+              However, these models still struggle to effectively perceive and exploit rich temporal information
+              in videos when responding to user queries. Therefore, they often generate descriptions of events
+              that are temporal inconsistent or causally implausible, causing severe hallucination issues.
+              While most prior studies have focused on spatial hallucinations (e.g. object mismatches),
+              temporal reasoning in video understanding remains relatively underexplored. To address this issue, we propose
+              <strong>Self-Diagnostic Contrastive Decoding (SEASON)</strong>,
+              a training-free method that adaptively enhances temporal and spatial faithfulness for each output token.
+              It achieves this by dynamically diagnosing each token's hallucination tendency and
+              applying adaptive contrastive decoding against its corresponding temporal and spatial negatives.
+              Extensive experiments demonstrate that SEASON outperforms all existing training-free hallucination mitigation
+              approaches on three hallucination examination benchmarks,
+              while further improves VideoLLMs across four general video understanding benchmarks.
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Method. -->
+      <h2 class="title is-3 has-text-centered">Methodology</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <img src="./figs/main_fig.pdf" alt="SEASON Framework Overview"
+            style="width:100%; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <p>
+            <strong>Overview of SEASON.</strong>  Given the input video \(V\) and the question \(Q\),
+            our proposed SEASON contrasts the original video representations \(v^O\) against
+            our introduced spatial \(v^S\) and temporal \(v^T\) negatives to jointly achieve temporal and spatial faithfulness.
+            Specifically, we design \(v^T\) via the proposed "Temporal Homogenization",
+            focusing on introducing temporal ambiguity while preserving spatial semantics.
+            The "Self-Diagnostic Mechanism" computes token-level adaptive weights \(W^S, W^T\) by
+            measuring attention divergence, dynamically steering the final decoding to
+            penalize spatial or temporal hallucinations.
+          </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered" style="margin-top: 1rem;">
+        <div class="column is-half">
+          <div class="content has-text-centered">
+            <p>Quantitative comparisons with hallucination mitigation methods on video captioning using FactVC.</p>
+            <img src="./tabs/factvc.png" alt="FactVC Results"
+              style="width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="content has-text-centered">
+            <p>Quantitative evaluation of both object and action hallucinations on video question answering using
+              VidHal.</p>
+            <img src="./tabs/vidhal.png" alt="VidHal Results"
+              style="width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+        </div>
+      </div>
+      <!--/ Method. -->
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Results. -->
+      <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h4 class="title is-5">Hallucination Examination Benchmarks</h4>
+          <div class="content has-text-centered">
+            <p>
+              Evaluation of multiple hallucination examination benchmarks with different VideoLLMs as backbones. 
+              Bold marks the best per group; highlights indicate the top two benchmark results.
+            </p>
+            <img src="./tabs/Hal_bench.png" alt="Hallucination Benchmarks"
+              style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <h4 class="title is-5">Hallucination Examination, Temporal Understanding, and Conventional Video Understanding Benchmarks</h4>
+          <div class="content has-text-centered">
+            <p>
+              Performance comparisons on benchmarks for hallucination examination, temporal, and conventional video understanding.
+              Different VideoLLMs are applied as backbones. Bold marks the best per group; highlights indicate the best benchmark results.
+            </p>
+            <img src="./tabs/All_bench.png" alt="Hallucination Benchmarks"
+              style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+        </div>
+      </div>
+      <!--/ Results. -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Analysis. -->
+      <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <!-- <h3 class="title is-5">Qualitative Comparison</h3> -->
+          <!-- Placeholder for qualitative image -->
+          <div class="has-text-centered">
+            <!-- Using PNG for high quality qualitative results -->
+            <img src="./figs/qualitative.pdf" alt="Qualitative Results"
+              style="width: 100%; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <p>
+            <strong>Qualitative visualization of SEASON's self-diagnostic mechanism.</strong> 
+            Qualitative visualization of SEASON's self-diagnostic weights (<span style="color: blue;">\(W^T\)</span> and
+            <span style="color: orange;">\(W^S\)</span>). In the generated text (the x-axis in the line plot), 
+            <span style="color: blue;">blue</span> tokens are identified as relying on visual temporal cues; 
+            SEASON thus contrasts them against the temporal negative (\(v^T\)) to ensure token-level temporal faithfulness.
+            For instance, tokens critical for temporal ordering like "B" (in (a)), as well as "A" and "first" ((in (b)))
+            clearly receive high temporal weights (<span style="color: blue;">\(W^T\)</span>) to ensure the sequence is correct.
+            On the other hand, <span style="color: orange;">orange</span> tokens rely on visual spatial cues and
+            are contrasted against the spatial negative (\(v^S\)).
+            This is evident as tokens describing objects and interactions, such as "placing butter...mixing bowl" in (a) and
+            "hand...swirl batter" in (b), are assigned high spatial weights (<span style="color: orange;">\(W^S\)</span>).
+            Both (a) and (b) are samples from Vidhalluc.
+          </p>
+        </div>
+      </div>
+      <!--/ Analysis. -->
+    </div>
+  </section>
+
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{SANTA2026,
+  title={Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment},
+  author={Anonymous Authors},
+  journal={WACV Algorithms Track},
+  year={2026}
+}</code></pre>
+    </div>
+  </section> -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://drive.google.com/file/d/1l-xKPtunQ4q8r0TdOD1guq7QVuQfvGf-/view?usp=sharing">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/chriwu018" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              Template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
