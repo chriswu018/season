@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment">
+  <meta name="keywords" content="Hallucination, Multimodal LLMs, Video Understanding, Contrastive Learning, SANTA">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SANTA</title>
+  <link rel="icon" href="ntu.png">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <!-- MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu｀">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://github.com/kaipochang">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://openreview.net/pdf?id=bshfchPM9H">
+              Rapper (ICLR 2024)
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-widescreen">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title publication-title" style="font-size: 2.35rem;">Mitigating Object and Action Hallucinations
+              in Multimodal LLMs<br>via Self-Augmented Contrastive Alignment</h1>
+            <div class="is-size-3 publication-authors" style="color: #2563eb; font-weight: bold; margin-bottom: 1rem;">
+              WACV 2026
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://kaipoc0810-personal-page.netlify.app/">Kai-Po Chang</a><sup>1,†</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/weiyuan0819/">Wei-Yuan Cheng</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://jasper0314-huang.github.io/">Chi-Pin Huang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://fuenyang1127.github.io/">Fu-En Yang</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://vllab.ee.ntu.edu.tw/ycwang.html">Yu-Chiang Frank Wang</a><sup>1,2,‡</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>National Taiwan University</span>
+              <span class="author-block"><sup>2</sup>NVIDIA</span>
+            </div>
+
+            <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
+              <span class="author-block"><sup>†</sup>f11942093@ntu.edu.tw, <sup>‡</sup>frankwang@nvidia.com</span>
+            </div>
+
+            <div class="columns is-mobile is-centered" style="margin-top: 1.5rem;">
+              <div class="column is-narrow">
+                <img src="./figs/ntu_logo.png" alt="NTU Logo" style="height: 60px; margin: 0 20px;">
+              </div>
+              <div class="column is-narrow">
+                <img src="./figs/nvidia_logo.png" alt="NVIDIA Logo" style="height: 60px; margin: 0 20px;">
+              </div>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://drive.google.com/file/d/130I3DZtX5LPSsPdQVLQpvBmxyLJo_4Ny/view?usp=sharing"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser Image Section -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="publication-banner" style="max-width: 60%; margin: 0 auto 2rem auto;">
+          <img src="./figs/teaser.png" alt="Teaser Image" style="width: 100%; height: auto; max-width: none;">
+        </div>
+        <div class="columns is-centered has-text-centered" style="margin-top: 2rem;">
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #f0f9ff; border: 1px solid #bae6fd;">
+              <span class="icon is-large has-text-info" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-bullseye fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-info has-text-weight-bold" style="margin-bottom: 0.5rem;">Goal</h4>
+              <p class="is-size-6 has-text-left">
+                Enable MLLMs to generate faithful textual captions that accurately describe visual objects and temporal
+                actions without hallucinations.
+              </p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #fef2f2; border: 1px solid #fecaca;">
+              <span class="icon is-large has-text-danger" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-exclamation-triangle fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-danger has-text-weight-bold" style="margin-bottom: 0.5rem;">Challenge</h4>
+              <p class="is-size-6 has-text-left">
+                MLLMs often hallucinate non-existent objects or incorrect actions due to language priors and inability
+                to ground temporal dynamics.
+              </p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box" style="height: 100%; background-color: #f0fdf4; border: 1px solid #bbf7d0;">
+              <span class="icon is-large has-text-success" style="margin-bottom: 0.5rem;">
+                <i class="fas fa-lightbulb fa-2x"></i>
+              </span>
+              <h4 class="title is-5 has-text-success has-text-weight-bold" style="margin-bottom: 0.5rem;">Our Solution
+              </h4>
+              <p class="is-size-6 has-text-left">
+                SANTA enhances faithfulness via self-augmented hallucinations as hard negatives and fine-grained
+                tracklet-phrase contrastive alignment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Recent advancement in multimodal LLMs (MLLMs) has demonstrated their remarkable capability to generate
+              descriptive captions for input videos. However, these models suffer from factual inaccuracies in the
+              generated descriptions, causing severe hallucination issues. While prior works have explored alleviating
+              hallucinations for static images, jointly mitigating visual object and temporal action hallucinations for
+              dynamic videos remains a challenging and unsolved task. To tackle this challenge, we propose a
+              <strong>Self-Augmented Contrastive Alignment (SANTA)</strong>
+              framework for enabling object and action faithfulness by exempting the spurious correlations and enforcing
+              the emphasis on visual facts. SANTA employs a hallucinative self-augmentation scheme to identify the
+              potential hallucinations that lie in the MLLM and transform the original captions to the contrasted
+              negatives. Furthermore, we develop a tracklet-phrase contrastive alignment to match the regional objects
+              and relation-guided actions with their corresponding visual and temporal phrases. Extensive experiments
+              demonstrate that SANTA outperforms existing methods in alleviating object and action hallucinations,
+              yielding superior performance on the hallucination examination benchmarks.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Method. -->
+      <h2 class="title is-3 has-text-centered">Methodology</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <img src="./figs/overview.png" alt="SANTA Framework Overview"
+            style="width:100%; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <p>
+            <strong>Overview of SANTA.</strong> We employ (a) Mitigating Video-Level Hallucination
+            by applying Hallucinative Self-Augmentation to identify the highly potential hallucinated tokens in MLLM
+            \(\theta_M\) that deviate from ground truth words (e.g., synonyms or hypernyms) and then perform
+            video-caption contrastive alignment. SANTA then (b) Mitigating Object and Action-Level
+            Hallucinations by Tracklet-Phrase Contrastive Alignment to align object and action tracklets with visual
+            and temporal phrases while contrasting hallucinative negatives.
+          </p>
+        </div>
+      </div>
+      <!--/ Method. -->
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Results. -->
+      <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h4 class="title is-5">Video Hallucination Examination Benchmarks</h4>
+          <div class="content has-text-centered">
+            <p>Evaluation on both object and action hallucinations with existing methods on MiraData-9k across three
+              types of video captions: overall content, main object, and background. Bold and underline indicate the
+              best and second best results, respectively.</p>
+            <img src="./tabs/miradata.png" alt="MiraData Results"
+              style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+
+          <div class="columns is-centered" style="margin-top: 1rem;">
+            <div class="column is-half">
+              <div class="content has-text-centered">
+                <p>Quantitative comparisons with hallucination mitigation methods on video captioning using FactVC.</p>
+                <img src="./tabs/factvc.png" alt="FactVC Results"
+                  style="width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="content has-text-centered">
+                <p>Quantitative evaluation of both object and action hallucinations on video question answering using
+                  VidHal.</p>
+                <img src="./tabs/vidhal.png" alt="VidHal Results"
+                  style="width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Results. -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Analysis. -->
+      <h2 class="title is-3 has-text-centered">Analysis & Qualitative Results</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-5">Qualitative Comparison</h3>
+          <!-- Placeholder for qualitative image -->
+          <div class="has-text-centered">
+            <!-- Using PNG for high quality qualitative results -->
+            <img src="./figs/main_qualitative.png" alt="Qualitative Results"
+              style="width: 100%; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <p>
+            Qualitative comparison of video captions predicted by HACL and SANTA. Note that words highlighted in
+            <span style="color: green;">green</span> indicate action faithfulness, while those in
+            <span style="color: red;">red</span> indicate action hallucination. Similarly, words in <span
+              style="color: blue;">blue</span> represent object faithfulness, whereas those in <span
+              style="color: orange;">orange</span> indicate object hallucination. The examples at (a) and (b) are
+            sampled from the hallucination benchmark.
+          </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-5">Analysis of Feature Space (t-SNE)</h3>
+          <div class="has-text-centered">
+            <img src="./figs/tsne.png" alt="t-SNE Analysis"
+              style="width: 100%; max-width: 800px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <p>
+            t-SNE visualization of the latent features of (a) video and caption, (b) object tracklets and phrases, and
+            (c) action tracklets and phrases. For the w/o SANTA setting, we directly visualize features from
+            LLaVA-Video. Upon training with SANTA LLaVA-Video improves the alignment between visual-language modalities
+            while exemplifying better distinction from the hallucinative captions.
+          </p>
+        </div>
+      </div>
+      <!--/ Analysis. -->
+    </div>
+  </section>
+
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{SANTA2026,
+  title={Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment},
+  author={Anonymous Authors},
+  journal={WACV Algorithms Track},
+  year={2026}
+}</code></pre>
+    </div>
+  </section> -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://drive.google.com/file/d/130I3DZtX5LPSsPdQVLQpvBmxyLJo_4Ny/view?usp=sharing">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/kaipochang" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              Template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
